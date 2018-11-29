@@ -1,0 +1,77 @@
+body {
+  font-size: 16px;
+}
+div.borderedDiv {
+    border: 2px solid black;
+    text-align: center;
+}
+div#header {
+    background-color: #EEEEEE;
+    transition: background-color 3s ease;
+    font: bold 24px monospace;
+    min-width: 200px;
+    width: 10%;
+    margin: auto;
+    color: black;
+}
+div.centered {
+    margin: 0 auto;
+    text-align: center;
+}
+div#clock {
+    font-size: 40px;
+    margin: 10px auto;
+    display: table;
+    width: 150px;
+}
+div#header:hover {
+    background-color: white;
+    transition: background-color 10s ease;
+}
+div#main {
+    min-width: 1120px;
+}
+div.graph {
+    width: 48%;
+    margin: 5px;
+    float:left;
+}
+div.table {
+    width: 300px;
+    margin: 5px;
+    float:left;
+}
+div.input {
+    margin: 5px;
+    float:left;
+    width: 290px;
+}
+div#image {
+    float: right;
+}
+div#input {
+    display: inline-block;
+    float: none;
+    width: 265px;
+    padding: 10px;
+}
+div#link {
+    width: 100px;
+    margin: 0 105px;
+}
+div#alert {
+    margin-top: 10px;
+    padding: 0.5%;
+    display: inline-block;
+    float: none;
+    visibility: hidden;
+    width: 276px;
+}
+table#data {
+    border-collapse: collapse;
+}
+table#data td, th{
+    border: 2px solid black;
+    padding: 5px;
+    text-align: center;
+}

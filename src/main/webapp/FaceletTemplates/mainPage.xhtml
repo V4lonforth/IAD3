@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:include src="head.xhtml"/>
+    <h:outputScript name="js/inputChecker.js"/>
+    <h:outputScript name="js/drawer.js"/>
+
+    <h:body onload="init()">
+        <div id="main">
+
+            <div class="graph">
+                <div class="borderedDiv" id="image">
+                    <ui:insert name="content"/>
+                </div>
+            </div>
+
+            <div class="input">
+                <div class="borderedDiv" id="input">
+                    <ui:insert name="input"/>
+                </div>
+                <div class="input">
+                    <div class="borderedDiv" id="alert">
+                        <ui:insert name="alert"/>
+                    </div>
+                </div>
+                <div class="input" id="link">
+                    <ui:insert name="link"/>
+                </div>
+            </div>
+
+            <div class="table">
+                <ui:insert name="results"/>
+            </div>
+
+        </div>
+    </h:body>
+</html>

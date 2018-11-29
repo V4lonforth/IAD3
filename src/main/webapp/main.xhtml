@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+   <h:body>
+      <ui:composition template="/FaceletTemplates/mainPage.xhtml">
+         <ui:define name="content">
+            <canvas id="canvas" width="440" height="440"/>
+         </ui:define>
+         <ui:define name="input">
+            <h:form id="form" onsubmit="return submitForm();">
+               <div class="text_input" id="input_x">
+                  X:
+                  <br/>
+                   <table align="center">
+                       <thead>
+                           <ui:repeat value="${Input.XValues}" var="val" varStatus="stat">
+                               <td>#{val}</td>
+                           </ui:repeat>
+                       </thead>
+                       <tr>
+                           <ui:repeat value="${Input.XValues}" var="val" varStatus="stat">
+                               <td>
+                                   <h:selectBooleanCheckbox p:id="x${stat.index}" p:name="form:x${stat.index}" value="${val == 0}" readonly="true" onchange="checkSelection(this);"/>
+                               </td>
+                           </ui:repeat>
+                       </tr>
+                   </table>
+               </div>
+               <div class="text_input">
+                  Y:
+                  <br/>
+                  <h:inputText id="input_y" value="#{Input.y}" onchange="drawGraph(); checkY();" p:placeholder="(-3, 5)">
+                      <f:converter converterId="javax.faces.Double"/>
+                      <f:validateDoubleRange minimum="-7" maximum="7"/>
+                  </h:inputText>
+               </div>
+                <div class="text_input" id="input_r">
+                    R:
+                    <br/>
+                    <table align="center">
+                        <thead>
+                        <ui:repeat value="${Input.RValues}" var="val">
+                            <td style="padding: 3px">#{val}</td>
+                        </ui:repeat>
+                        </thead>
+                        <tr>
+                            <ui:repeat value="${Input.RValues}" var="val" varStatus="stat">
+                                <td>
+                                    <h:selectBooleanCheckbox p:id="r${stat.index}" p:name="form:r${stat.index}" value="${stat.index == 0}" readonly="true" onchange="checkSelection(this);"/>
+                                </td>
+                            </ui:repeat>
+                        </tr>
+                    </table>
+                </div>
+                <h:inputHidden id="hidden_x" value="#{Input.x}">
+                    <f:converter converterId="javax.faces.Double"/>
+                    <f:validateDoubleRange minimum="-7" maximum="7"/>
+                </h:inputHidden>
+                <h:inputHidden id="hidden_r" value="#{Input.r}">
+                    <f:converter converterId="javax.faces.Double"/>
+                    <f:validateDoubleRange minimum="1" maximum="3"/>
+                </h:inputHidden>
+                <h:commandButton id="submitButton" action="#{ResultsController.AddResult(Input)}" value="Check"/>
+            </h:form>
+         </ui:define>
+
+          <ui:define name="results">
+              <h:dataTable id="data" value="#{ResultsController.hitsData}" var="o"
+                columnClasses="dataX,dataY,dataR,dataRes,dataTime">
+                  <h:column>
+                      <f:facet name="header">X</f:facet>
+                      #{o.x}
+                  </h:column>
+                  <h:column>
+                      <f:facet name="header">Y</f:facet>
+                      #{o.y}
+                  </h:column>
+                  <h:column>
+                      <f:facet name="header">R</f:facet>
+                      #{o.r}
+                  </h:column>
+                  <h:column>
+                      <f:facet name="header">Result</f:facet>
+                      #{o.pointInArea ? "In area" : "Not in area"}
+                  </h:column>
+                  <h:column>
+                      <f:facet name="header">Time</f:facet>
+                      #{o.formattedTime}
+                  </h:column>
+              </h:dataTable>
+          </ui:define>
+          <ui:define name="link">
+              <h:form>
+                  <h:commandButton action="startPage" value="Start page"/>
+              </h:form>
+          </ui:define>
+      </ui:composition>
+   </h:body>
+</html>
